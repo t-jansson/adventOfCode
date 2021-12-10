@@ -13,9 +13,9 @@ for line in report:
 
 print(Counter)
 
-gamma = [0] * (len(Counter)-1)
-epsilon = [0] * (len(Counter)-1)
-for i in range(0, len(Counter)-1):
+gamma = [0] * (len(Counter))
+epsilon = [0] * (len(Counter))
+for i in range(0, len(Counter)):
     if(Counter[i] > len(report) / 2):
         gamma[i] = '1'
         epsilon[i] = '0'
