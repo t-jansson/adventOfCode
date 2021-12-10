@@ -7,19 +7,21 @@ with open('Input.txt') as input:
 
 depth = int(0)
 position = int(0)
+aim = int(0)
 for command in commands:
     if('forward' in command):
         #print('add value to position')
         line = command.split(' ')
         position += int(line[1])
+        depth += aim * int(line[1])
     if('down' in command):
         #print('decrease position')
         line = command.split(' ')
-        depth += int(line[1])
+        aim += int(line[1])
     if('up' in command):
         #print('increase position')
         line = command.split(' ')
-        depth -= int(line[1])
+        aim -= int(line[1])
 
 print('Depth:', depth, 'Position:', position)
 print('Result:', int(depth) * int(position))
