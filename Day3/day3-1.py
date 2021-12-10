@@ -16,15 +16,15 @@ print(Counter)
 gamma = [0] * (len(Counter)-1)
 epsilon = [0] * (len(Counter)-1)
 for i in range(0, len(Counter)-1):
-    if(Counter[i] > 500):
+    if(Counter[i] > len(report) / 2):
         gamma[i] = '1'
         epsilon[i] = '0'
     else:
         gamma[i] = '0'
         epsilon[i] = '1'
 
-gammaValue = int("".join(str(i) for i in gamma), 2)
-epsilonValue = int("".join(str(i) for i in epsilon), 2)
+gammaValue = int(''.join(str(i) for i in gamma), 2)
+epsilonValue = int(''.join(str(i) for i in epsilon), 2)
 
 print('Gamma:', gamma, 'Val:', gammaValue)
 print('Epsilon:', epsilon, 'Val:', epsilonValue)
