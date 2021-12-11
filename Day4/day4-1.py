@@ -6,11 +6,11 @@ class Bingo:
         self.drawPosition = int(0)
         self.numbers = numbers.split(',')
         self.boards = boards
+        self.markers = [x[:] for x in boards]
+        for line in self.markers:
+            for i in range(0, len(line)):
+                line[i] = '0'
 
-        for line in boards:
-            
-
-        self.markers = 
         pass
 
     def drawNumber(self):
@@ -18,13 +18,19 @@ class Bingo:
         self.drawPosition += 1
         return number
 
-
+    def markPosition(self, value):
+        
 
 
 with open('Input.txt') as input:
     numbers = input.readline()
     boards = input.readlines()
     boards = [line.strip('\n') for line in boards]
+    # boards = [line.replace(' ', '') for line in boards]
+    boards = [line.split(' ') for line in boards]
+    for line in boards:
+        while(line.count('') > 0):
+            line.remove('')
 
 game = Bingo(numbers, boards)
 
