@@ -1,4 +1,4 @@
-#Advent of Code 2021 Day 2 - 1
+#Advent of Code 2021 Day 2 - 2
 
 import os, traceback
 

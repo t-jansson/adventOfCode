@@ -1,4 +1,4 @@
-#Advent of Code 2021 Day 2 - 1
+#Advent of Code 2021 Day 3 - 1
 
 import os, traceback
 from typing import Counter
