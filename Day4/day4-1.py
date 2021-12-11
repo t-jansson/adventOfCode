@@ -4,10 +4,13 @@ class Bingo:
 
     def __init__(self, numbers, boards) -> None:
         self.drawPosition = int(0)
-
         self.numbers = numbers.split(',')
-
         self.boards = boards
+
+        for line in boards:
+            
+
+        self.markers = 
         pass
 
     def drawNumber(self):
@@ -21,6 +24,7 @@ class Bingo:
 with open('Input.txt') as input:
     numbers = input.readline()
     boards = input.readlines()
+    boards = [line.strip('\n') for line in boards]
 
 game = Bingo(numbers, boards)
 
