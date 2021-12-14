@@ -49,7 +49,7 @@ class Bingo:
     # Check only one board
     def getUnmarkedValue(self):
         value = int(0)
-        board = round(self.lastSquare[1] / 5)
+        board = int(self.lastSquare[1] / 5) # Round down
         for y in range(board * 5, board * 5 + 5):
             for x in range(0, len(self.markers[y])):
                 if(self.markers[y][x] == '0'):
@@ -85,61 +85,8 @@ while(True):
         break
 
 print('Last number:', number)
-#print('Last square:', game.lastSquare)
+print('Last square:', game.lastSquare)
 unmarkedValues = game.getUnmarkedValue()
 print('Unmarked values in winning board', unmarkedValues)
 result = unmarkedValues * int(number)
 print('Result:', result)
-
-# oxygenData = [line.strip('\n') for line in report]
-# for i in range(0, len(oxygenData[0])):
-#     if(len(oxygenData) == 1):
-#         break
-#     counter = int(0)
-#     length = len(oxygenData)
-#     # print('Length:', length)
-#     for data in oxygenData:
-#         if(data[i] == '1'):
-#             counter += 1
-#     # print('Counter:', counter)
-#     if(counter >= length / 2):
-#         mostCommon = '1'
-#     else:
-#         mostCommon = '0'
-#     # print('MostCommon:', mostCommon)
-#     newData = []
-#     for data in oxygenData:
-#         if(data[i] == mostCommon):
-#             # print(i, data)
-#             newData.append(data)
-#     oxygenData = newData
-# oxygenValue = int(''.join(str(i) for i in oxygenData), 2)
-# print(oxygenData, oxygenValue)
-
-# co2Data = [line.strip('\n') for line in report]
-# for i in range(0, len(co2Data[0])):
-#     if(len(co2Data) == 1):
-#         break
-#     counter = int(0)
-#     length = len(co2Data)
-#     # print('Length:', length)
-#     for data in co2Data:
-#         if(data[i] == '1'):
-#             counter += 1
-#     # print('Counter:', counter)
-#     if(counter >= length / 2):
-#         mostCommon = '0'
-#     else:
-#         mostCommon = '1'
-#     # print('MostCommon:', mostCommon)
-#     newData = []
-#     for data in co2Data:
-#         if(data[i] == mostCommon):
-#             # print(i, data)
-#             newData.append(data)
-#     co2Data = newData
-# co2Value = int(''.join(str(i) for i in co2Data), 2)
-# print(co2Data, co2Value)
-
-# print('Result:', oxygenValue * co2Value)
-
