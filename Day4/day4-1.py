@@ -49,7 +49,8 @@ class Bingo:
     # Check only one board
     def getUnmarkedValue(self):
         value = int(0)
-        for y in range(0, len(self.markers)):
+        board = round(self.lastSquare[1] / 5)
+        for y in range(board * 5, board * 5 + 5):
             for x in range(0, len(self.markers[y])):
                 if(self.markers[y][x] == '0'):
                     value += int(self.boards[y][x])
@@ -84,9 +85,11 @@ while(True):
         break
 
 print('Last number:', number)
-print('Last square:', game.lastSquare)
-print(game.markers)
-print(game.getUnmarkedValue())
+#print('Last square:', game.lastSquare)
+unmarkedValues = game.getUnmarkedValue()
+print('Unmarked values in winning board', unmarkedValues)
+result = unmarkedValues * int(number)
+print('Result:', result)
 
 # oxygenData = [line.strip('\n') for line in report]
 # for i in range(0, len(oxygenData[0])):
