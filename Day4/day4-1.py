@@ -7,7 +7,7 @@ class Bingo:
         self.numbers = numbers
         self.boards = boards
         self.markers = [x[:] for x in boards]
-        self.lastSquare = [0,0]
+        self.lastSquare = [0] * 2
         for line in self.markers:
             for i in range(0, len(line)):
                 line[i] = '0'
@@ -34,20 +34,18 @@ class Bingo:
                 if(self.markers[y][x] == '1'):
                     xCounter += 1
                 if(xCounter == 5):
-                    self.finalSquare = [y,x].copy
+                    self.lastSquare = [x, y]
                     return 'Bingo'
                     
-        # Change to only check column in board
         for x in range(0, len(self.markers[0])):
             for y in range(0, len(self.markers)):
                 if(y % 5 == 0): yCounter = 0
                 if(self.markers[y][x] == '1'):
                     yCounter += 1
                 if(yCounter == 5):
-                    self.finalSquare = [y,x].copy
+                    self.lastSquare = [x, y]
                     return 'Bingo'
 
-        
     # Check only one board
     def getUnmarkedValue(self):
         value = int(0)
