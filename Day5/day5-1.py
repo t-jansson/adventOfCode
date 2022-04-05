@@ -44,26 +44,56 @@
 # Consider only horizontal and vertical lines. At how many points do at least two lines overlap?
 
 
+import re
+
+
+def checkVerticalHorizontal(values):
+    if(values[0] == values[2]) : return 1
+    elif(values[1] == values[3]) : return 2
+    else : return -1
+
+def getValuesFromLine(line) :
+    values = [0] * 4
+    values[0] = int(line[0:1])
+    values[1] = int(line[2:3])
+    values[2] = int(line[7:8])
+    values[3] = int(line[9:10])
+    return values
+
+def markHorizontalLine(floor, y: int, x1: int, x2: int) :
+    for x in range(min(x1,x2), max(x1,x2)+1) :
+        floor[x][y] = 5
+        print('X:', x, 'Y:', y)
+    return floor
+
+def markVerticalLine(floor, x: int, y1: int, y2: int) :
+    for y in range(min(y1,y2), max(y1,y2)+1) :
+        floor[x][y] = 2
+        print('X:', x, 'Y:', y)
+    return floor
 
 
 #### Main ####
 
-
+floor = [[int(0)] * 10] * 10
 
 with open('Day5\inputExample.txt') as input:
     ventLines = input.readlines()
-    # ventLines = ventLines.split(' -> ')
-    # ventLines = [lines.strip(' -> ') for lines in ventLines]
-    # ventLines = [lines.strip('\n') for lines in ventLines]
-    # boards = input.readlines()
-    # boards = [line.strip('\n') for line in boards]
-    # boards = [line.split(' ') for line in boards]
-    # for line in boards:
-    #     while(line.count('') > 0):
-    #         line.remove('')
-    # boards[:] = [x for x in boards if x]
+    ventLines = [lines.strip('\n') for lines in ventLines]
 
-for lines in ventLines :
-    print(lines)
+for line in ventLines :
+    print(line)
+    values = getValuesFromLine(line)
+    if (values[0] == values[2]) :
+        # print('Vertical')
+        floor = markVerticalLine(floor, values[0], values[1], values[3])
+    elif (values[1] == values[3]) :
+        # print('Horizontal')
+        floor = markHorizontalLine(floor, values[1], values[0], values[2])
+    # else :
+        # print('Diagonal?')
 
-    
+print('MARKS:')
+
+for marks in floor :
+    print(marks)
