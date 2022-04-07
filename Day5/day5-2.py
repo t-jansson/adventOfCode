@@ -1,4 +1,4 @@
-#Advent of Code 2021 Day 5 - 1
+#Advent of Code 2021 Day 5 - 2
 
 # --- Day 5: Hydrothermal Venture ---
 
