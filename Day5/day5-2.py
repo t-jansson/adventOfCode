@@ -124,9 +124,9 @@ def markDiagonalLine(floor, x1: int, y1: int, x2: int, y2: int) :
 
 #### Main ####
 
-floor = [[0] * 10 for x in range(10)]
+floor = [[0] * 1000 for x in range(1000)]
 
-with open('Day5\inputExample.txt') as input:
+with open('Day5\input.txt') as input:
     ventLines = input.readlines()
     ventLines = [lines.strip('\n') for lines in ventLines]
 
