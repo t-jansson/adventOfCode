@@ -56,16 +56,21 @@
 
 #### Main ####
 
-with open('Day6\inputExample.txt') as input:
+nrOfDaysToSimulate = 80
+
+with open('Day6\input.txt') as input:
     lanternfish = input.readline()
     lanternfish = lanternfish.split(',')
+    lanternfish = [int(i) for i in lanternfish]
 
-for day in range(18) :
+print('Initial state:', lanternfish)
+
+for day in range(1, nrOfDaysToSimulate +1) :
     for i in range(len(lanternfish)) :
-        lanternfish[i] -= 1
         if(lanternfish[i] == 0) :
             lanternfish.append(8)
-            lanternfish[i] = 6
-    print('After', day, 'day:', lanternfish)
+            lanternfish[i] = 7
+        lanternfish[i] -= 1
+    # print('After', day, 'day:', lanternfish)
 
 print('Total nr of fish:', len(lanternfish))
