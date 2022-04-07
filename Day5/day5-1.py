@@ -62,20 +62,29 @@ def getValuesFromLine(line) :
 
 def markHorizontalLine(floor, y: int, x1: int, x2: int) :
     for x in range(min(x1,x2), max(x1,x2)+1) :
-        floor[x][y] = 5
+        floor[x][y] += 1
         print('X:', x, 'Y:', y)
     return floor
 
 def markVerticalLine(floor, x: int, y1: int, y2: int) :
     for y in range(min(y1,y2), max(y1,y2)+1) :
-        floor[x][y] = 2
+        floor[x][y] += 1
         print('X:', x, 'Y:', y)
     return floor
 
+def calcMarks(floor) :
+    nrOfMarks = 0
+    for x in range(len(floor)) :
+        for y in range(len(floor[x])) :
+            if(floor[x][y] >= 2) :
+                nrOfMarks += 1
+    return nrOfMarks
 
 #### Main ####
 
-floor = [[int(0)] * 10] * 10
+# floor = [[int(0)] * 10] * 10 
+floor = [[0] * 10 for _ in range(10)]
+# [[None]*5 for _ in range(5)]
 
 with open('Day5\inputExample.txt') as input:
     ventLines = input.readlines()
@@ -97,3 +106,5 @@ print('MARKS:')
 
 for marks in floor :
     print(marks)
+
+print('Positions with 2 or more marks:', calcMarks(floor))
