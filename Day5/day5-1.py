@@ -54,22 +54,31 @@ def checkVerticalHorizontal(values):
 
 def getValuesFromLine(line) :
     values = [0] * 4
-    values[0] = int(line[0:1])
-    values[1] = int(line[2:3])
-    values[2] = int(line[7:8])
-    values[3] = int(line[9:10])
+
+    line = line.split()
+    xy1 = line[0].split(',')
+    xy2 = line[2].split(',')
+
+    values[0] = int(xy1[0])
+    values[1] = int(xy1[1])
+    values[2] = int(xy2[0])
+    values[3] = int(xy2[1])
+    # values[0] = int(line[0:3])
+    # values[1] = int(line[4:7])
+    # values[2] = int(line[11:14])
+    # values[3] = int(line[15:18])
     return values
 
 def markHorizontalLine(floor, y: int, x1: int, x2: int) :
     for x in range(min(x1,x2), max(x1,x2)+1) :
         floor[x][y] += 1
-        print('X:', x, 'Y:', y)
+        # print('X:', x, 'Y:', y)
     return floor
 
 def markVerticalLine(floor, x: int, y1: int, y2: int) :
     for y in range(min(y1,y2), max(y1,y2)+1) :
         floor[x][y] += 1
-        print('X:', x, 'Y:', y)
+        # print('X:', x, 'Y:', y)
     return floor
 
 def calcMarks(floor) :
@@ -82,16 +91,14 @@ def calcMarks(floor) :
 
 #### Main ####
 
-# floor = [[int(0)] * 10] * 10 
-floor = [[0] * 10 for _ in range(10)]
-# [[None]*5 for _ in range(5)]
+floor = [[0] * 1000 for _ in range(1000)]
 
-with open('Day5\inputExample.txt') as input:
+with open('Day5\input.txt') as input:
     ventLines = input.readlines()
     ventLines = [lines.strip('\n') for lines in ventLines]
 
 for line in ventLines :
-    print(line)
+    # print(line)
     values = getValuesFromLine(line)
     if (values[0] == values[2]) :
         # print('Vertical')
@@ -102,9 +109,9 @@ for line in ventLines :
     # else :
         # print('Diagonal?')
 
-print('MARKS:')
+# print('MARKS:')
 
-for marks in floor :
-    print(marks)
+# for marks in floor :
+#     print(marks)
 
 print('Positions with 2 or more marks:', calcMarks(floor))
