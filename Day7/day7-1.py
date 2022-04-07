@@ -39,12 +39,12 @@
 
 import statistics
 
-with open('day7\inputExample.txt') as input:
+with open('day7\input.txt') as input:
     crabs = input.readline()
     crabs = crabs.split(',')
     crabs = [int(i) for i in crabs]
 
-print('Initial state:', crabs)
+# print('Initial state:', crabs)
 
 median = round(statistics.median(crabs))
 print('Median:', median)
