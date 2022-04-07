@@ -63,29 +63,24 @@ def getValuesFromLine(line) :
     values[1] = int(xy1[1])
     values[2] = int(xy2[0])
     values[3] = int(xy2[1])
-    # values[0] = int(line[0:3])
-    # values[1] = int(line[4:7])
-    # values[2] = int(line[11:14])
-    # values[3] = int(line[15:18])
+  
     return values
 
 def markHorizontalLine(floor, y: int, x1: int, x2: int) :
     for x in range(min(x1,x2), max(x1,x2)+1) :
-        floor[x][y] += 1
-        # print('X:', x, 'Y:', y)
+        floor[y][x] += 1
     return floor
 
 def markVerticalLine(floor, x: int, y1: int, y2: int) :
     for y in range(min(y1,y2), max(y1,y2)+1) :
-        floor[x][y] += 1
-        # print('X:', x, 'Y:', y)
+        floor[y][x] += 1
     return floor
 
 def calcMarks(floor) :
     nrOfMarks = 0
     for x in range(len(floor)) :
         for y in range(len(floor[x])) :
-            if(floor[x][y] >= 2) :
+            if(floor[y][x] >= 2) :
                 nrOfMarks += 1
     return nrOfMarks
 
