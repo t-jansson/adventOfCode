@@ -70,11 +70,6 @@
 # Consider all of the lines. At how many points do at least two lines overlap?
 
 
-def checkVerticalHorizontal(values):
-    if(values[0] == values[2]) : return 1
-    elif(values[1] == values[3]) : return 2
-    else : return -1
-
 def getValuesFromLine(line) :
     values = [0] * 4
 
@@ -90,27 +85,48 @@ def getValuesFromLine(line) :
 
 def markHorizontalLine(floor, y: int, x1: int, x2: int) :
     for x in range(min(x1,x2), max(x1,x2)+1) :
-        floor[x][y] += 1
+        floor[y][x] += 1
     return floor
 
 def markVerticalLine(floor, x: int, y1: int, y2: int) :
     for y in range(min(y1,y2), max(y1,y2)+1) :
-        floor[x][y] += 1
+        floor[y][x] += 1
     return floor
 
 def calcMarks(floor) :
     nrOfMarks = 0
     for x in range(len(floor)) :
         for y in range(len(floor[x])) :
-            if(floor[x][y] >= 2) :
+            if(floor[y][x] >= 2) :
                 nrOfMarks += 1
     return nrOfMarks
 
+def checkDiagonalLine(x1: int, y1: int, x2: int, y2: int) :
+    if(max(x1,x2) - min(x1,x2) == max(y1,y2) - min(y1,y2)) : 
+        return 1
+    else : 
+        return 0
+
+def markDiagonalLine(floor, x1: int, y1: int, x2: int, y2: int) :
+    x = list(range(min(x1,x2), max(x1,x2) +1))
+    y = list(range(min(y1,y2), max(y1,y2) +1))
+
+    if(x1 > x2) :
+        x.reverse()
+    if(y1 > y2) :
+        y.reverse()
+
+    for i in range(len(x)) :
+        floor[y[i]][x[i]] += 1
+        # print('Marking diagonal: ', y[i], x[i])
+
+    return floor
+
 #### Main ####
 
-floor = [[0] * 1000 for x in range(1000)]
+floor = [[0] * 10 for x in range(10)]
 
-with open('Day5\input.txt') as input:
+with open('Day5\inputExample.txt') as input:
     ventLines = input.readlines()
     ventLines = [lines.strip('\n') for lines in ventLines]
 
@@ -123,8 +139,12 @@ for line in ventLines :
     elif (values[1] == values[3]) :
         # print('Horizontal')
         floor = markHorizontalLine(floor, values[1], values[0], values[2])
-    # else :
-        # print('Diagonal?')
+    elif (checkDiagonalLine(values[0], values[1], values[2], values[3])) :
+        # print('Diangonal 45deg')
+        # print('Diagonal:', values[0], values[1], values[2], values[3])
+        floor = markDiagonalLine(floor, values[0], values[1], values[2], values[3])
+    else :
+        print('Odd:', values[0], values[1], values[2], values[3])
 
 # print('MARKS:')
 
