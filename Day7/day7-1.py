@@ -37,7 +37,7 @@
 
 #### Main ####
 
-
+import statistics
 
 with open('day7\inputExample.txt') as input:
     crabs = input.readline()
@@ -46,7 +46,13 @@ with open('day7\inputExample.txt') as input:
 
 print('Initial state:', crabs)
 
+median = round(statistics.median(crabs))
+print('Median:', median)
 
+fuel = 0
 
-# print('Total nr of fish:', sum(lanternfish))
+for crab in crabs :
+    fuel += abs(crab - median)
+
+print('Fuel used:', fuel)
 
