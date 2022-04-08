@@ -44,9 +44,6 @@
 # Consider only horizontal and vertical lines. At how many points do at least two lines overlap?
 
 
-import re
-
-
 def checkVerticalHorizontal(values):
     if(values[0] == values[2]) : return 1
     elif(values[1] == values[3]) : return 2
