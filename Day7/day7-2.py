@@ -71,7 +71,8 @@ with open('day7\input.txt') as input:
 
 # print('Initial state:', crabs)
 
-mean = round(statistics.mean(crabs))
+mean = int(statistics.mean(crabs))
+# print('Mean:', statistics.mean(crabs))
 print('Mean:', mean)
 
 fuel = 0
