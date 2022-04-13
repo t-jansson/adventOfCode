@@ -75,13 +75,23 @@
 
 #### Main ####
 
-with open('day8\inputExample.txt') as input:
+
+
+with open('day8\input.txt') as input:
     segmentData = input.readlines()
     
+counter = int(0)
 for line in segmentData :
     line = line.split(' | ')
     segmentDigits = line[1]
+    segmentDigits = segmentDigits.split()
+    # print(segmentDigits)
 
-segmentDigits = segmentDigits.split()
-print('Segment Digits:', segmentDigits)
+    for digit in segmentDigits :
+        if( len(digit) == 2 or len(digit) == 3 or len(digit) == 4 or len(digit) == 7 ) :
+            counter += 1
+
+print('Counter:', counter)
+
+
 
