@@ -1,11 +1,7 @@
-#Advent of Code 2022 Day 1 - 1
+#Advent of Code 2022 Day 2 - 1
 
 with open('input.txt') as input:
     input = input.readlines()
-    
-# input = ['Rock' if hand == 'A' or hand == 'X' else hand for hand in input]
-# input = ['Paper' if hand == 'B' or hand == 'Y' else hand for hand in input]
-# input = ['Scissor' if hand == 'C' or hand == 'Z' else hand for hand in input]
 
 score = 0
 
