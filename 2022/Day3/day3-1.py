@@ -7,15 +7,13 @@ sum = 0
 
 for items in input:
     items = items.strip()
-    fCompartment = items[0:int(len(items)/2)]
-    sCompartment = items[int(len(items)/2):]
+    c1 = items[0:int(len(items)/2)]
+    c2 = items[int(len(items)/2):]
 
-    for char in fCompartment:
-        if sCompartment.find(char) > 0:
-            value = ord(char.lower()) - 96
-            if char.isupper():
-                value = value + 26
-            sum = sum + value
-            break
+    char = list(set(c1) & set(c2))
+    if char[0].isupper(): 
+        sum += ord(char[0]) - 38
+    else:
+        sum += ord(char[0]) - 96
 
 print(sum)
