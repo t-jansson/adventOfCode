@@ -19,11 +19,4 @@ for pairs in input:
         sum += 1
         print(pairs)
 
-    # set1 = set()
-    # for i in range(int(p1[0]),int(p1[1])+1):
-    #     set1.add(i)
-    # set2 = set()
-    # for i in range(int(p2[0]),int(p2[1])+1):
-    #     set2.add(i)
-
 print(sum)
