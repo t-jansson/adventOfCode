@@ -16,8 +16,10 @@ for line in input:
                 columns[i].insert(0, line[j:j+3])
             i += 1
     elif line[0:4] == 'move': #Move crates
-        for i in range(int(line[5])): #How many crates to move
-            columns[int(line[17])-1].append(columns[int(line[12])-1].pop())
+        moves = line.split()
+        for i in range(int(moves[1])): #How many crates to move
+            #columns[int(line[17])-1].append(columns[int(line[12])-1].pop())
+            columns[int(moves[5])-1].append(columns[int(moves[3])-1].pop())
     else:
         print('Init', columns)
 
