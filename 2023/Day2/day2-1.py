@@ -39,4 +39,4 @@ for line in lines:
     if possible:
         sum += gameID
 
-print("SUM:", sum)
+print("Sum:", sum)
