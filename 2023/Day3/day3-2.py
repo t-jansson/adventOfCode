@@ -41,5 +41,5 @@ for gear1 in gears:
             # print(gear1, gear2)
             sum += int(gear1[0]) * int(gear2[0])
 
-sum = int(sum/2)
+sum = int(sum/2) #All gears are calculated twice, so divide by two
 print("Sum:", sum)

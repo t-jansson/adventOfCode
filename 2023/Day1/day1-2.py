@@ -7,11 +7,9 @@ with open('input.txt') as input:
 
 sum = 0
 for line in lines:
-    if( line == "seven6sevenphjfhdtnrhfsgcfived9seven\n"):
-        print("Stop")
     firstDigit = [None, None]
     lastDigit = [None, None]
-    print(line)
+    # print(line)
     for i in range(0, len(numbers)):
         number = numbers[i]
         start = 0
@@ -21,7 +19,7 @@ for line in lines:
                 if(i < 9):
                     number = numbers[i+9]
                 start = index + 1
-                print(number, ":", index)
+                # print(number, ":", index)
                 if firstDigit[1] == None:
                     firstDigit = number, index
                 elif firstDigit[1] > index:
@@ -34,7 +32,7 @@ for line in lines:
             else:
                 break
 
-    print(firstDigit[0] + lastDigit[0])
+    # print(firstDigit[0] + lastDigit[0])
 
     lineDigit = int(firstDigit[0] + lastDigit[0])
         
