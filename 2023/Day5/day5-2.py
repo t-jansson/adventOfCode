@@ -1,4 +1,4 @@
-#Advent of Code 2023 Day 5 - 2
+#Advent of Code 2023 Day 5 - 2 not working
 
 import threading, os
 
@@ -27,8 +27,8 @@ def calc(input, dataList):
 
 def calcLocation():
     minLocation = 0
-    start = int(seeds[int(threading.current_thread().name)])
-    stop = int(seeds[int(threading.current_thread().name)]) + int(seeds[int(threading.current_thread().name)+1])
+    start = int(seeds[int(threading.current_thread().name)*2])
+    stop = int(seeds[int(threading.current_thread().name)*2]) + int(seeds[int(threading.current_thread().name)*2+1])
     for y in range(start, stop): #Tar för lång tid...
         # print(y)
         #seed = int(seed)
@@ -42,6 +42,7 @@ def calcLocation():
         # print(seed, location)
         if minLocation == 0 or location < minLocation:
             minLocation = location
+    print("Thread", threading.current_thread().name, "done:", minLocation)        
     MINLOCATIONS[int(threading.current_thread().name)] = minLocation
 
 if __name__ == "__main__":
