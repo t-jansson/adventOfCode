@@ -1,5 +1,7 @@
 #Advent of Code 2023 Day 8 - 1
 
+import itertools
+
 if __name__ == "__main__":
 
     with open('input.txt') as input:
@@ -7,35 +9,21 @@ if __name__ == "__main__":
         input.readline() #Read empty line
         input = input.readlines()
 
-    A = []
-    B = []
-    C = []
+
+    #Create dictionalry of the network
+    network = {}        
     for data in input:
-        line = {}
-        A.append(data[0:3])
-        B.append(data[7:10])
-        C.append(data[12:15])
+        network[data[0:3]] = [data[7:10], data[12:15]]
 
     pos = 'AAA' #Start location
     target = 'ZZZ'
-    index = A.index(pos)
     steps = 0
-    while(pos != target):
-        for direction in directions:
-            steps += 1
-            print(direction, pos, steps)
-            if direction == "L":
-                pos = B[index]
-                if pos == target: break
-                index = A.index(pos)
-            elif direction == "R":
-                pos = C[index]
-                if pos == target: break
-                index = A.index(pos)
-            else: 
-                print("Something when wrong")
-                pos = target #To stop while loop
-                break
+    for steps, direction in enumerate(itertools.chain.from_iterable(itertools.repeat(directions)), start=1):
+        # print(direction, pos, steps)
         
+        index = 0 if direction == "L" else 1
+        pos = network[pos][index]
+        if pos == target: break
+
     print("Steps", steps)
         
