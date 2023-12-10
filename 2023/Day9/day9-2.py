@@ -1,17 +1,17 @@
-#Advent of Code 2023 Day 9 - 1
+#Advent of Code 2023 Day 9 - 2
 
-def findNext(line):
+def findPrevious(line):
     newLine = []
     for i in range(0, len(line)-1):
         newLine.append(line[i+1] - line[i])
     
     if not all(x == 0 for x in newLine):
-        newLine.append(newLine[-1] + findNext(newLine))
+        newLine.insert(0, newLine[0] - findPrevious(newLine))
     else:
         newLine.append(0)
 
     # print(newLine)
-    return newLine[-1]
+    return newLine[0]
 
 if __name__ == "__main__":
 
@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     results = []
     for data in inputSequence:
-        results.append(data[-1] + findNext(data))
+        results.append(data[0] - findPrevious(data))
         # print(data)
 
     result = sum(results)
