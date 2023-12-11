@@ -46,7 +46,7 @@ def findStartOptions(start):
 def findNextLocation(old, current):
     if old == current:
         print("ERROR", old, current)
-    print(tiles[current[0]][current[1]])
+    # print(tiles[current[0]][current[1]])
     match tiles[current[0]][current[1]]:
         case "|":
             if old[0] < current[0]:
@@ -93,9 +93,8 @@ if __name__ == "__main__":
         temp = [s.strip() for s in temp]
     tiles = tuple(temp)
         
-    print(tiles)
+    # print(tiles)
     start = findStart()
-    print(start)
     
     steps = 0
     oldPos = [start, start]
@@ -103,12 +102,12 @@ if __name__ == "__main__":
     newPos = [0,0]
     steps += 1
     while curPos[0] != curPos[1]:
-        print(curPos[0])
+        # print(curPos[0])
         newPos[0] = findNextLocation(oldPos[0], curPos[0])
-        print(newPos[0])
-        print(curPos[1])
+        # print(newPos[0])
+        # print(curPos[1])
         newPos[1] = findNextLocation(oldPos[1], curPos[1])
-        print(newPos[1])
+        # print(newPos[1])
         oldPos = tuple(curPos)
         curPos = tuple(newPos)
         steps += 1
