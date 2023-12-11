@@ -4,13 +4,35 @@ tiles = ()
 
 def findStart():
     for i in range(0, len(tiles)):
-        print(tiles[i])
+        #print(tiles[i])
         for j in range(0, len(tiles[i])):
-            print(tiles[i][j])
+            #print(tiles[i][j])
             if tiles[i][j] == "S":
                 return i,j
     return False
 
+def findStartOptions(start):
+    print(tiles[start[0]][start[1]], start[0],start[1])
+
+    startOptions = []
+
+    if tiles[start[0]-1][start[1]] in {"|", "F", "7"}:
+        print(tiles[start[0]-1][start[1]], start[0]-1,start[1])
+        startOptions.append([start[0]-1,start[1]])
+    if tiles[start[0]][start[1]+1] in {"-", "J", "7"}:
+        print(tiles[start[0]][start[1]+1], start[0],start[1]+1)
+        startOptions.append([start[0],start[1]+1])
+    if tiles[start[0]+1][start[1]] in {"|", "L", "J"}:
+        print(tiles[start[0]+1][start[1]], start[0]+1,start[1])
+        startOptions.append([start[0]+1,start[1]])
+    if tiles[start[0]][start[1]-1] in {"-", "L", "F"}:
+        print(tiles[start[0]][start[1]-1], start[0],start[1]-1)
+        startOptions.append([start[0],start[1]-1])
+    
+    if len(startOptions) == 2:
+        return startOptions
+    else:
+        print("Error at start", startOptions)
 
 # | is a vertical pipe connecting north and south.
 # - is a horizontal pipe connecting east and west.
@@ -21,25 +43,48 @@ def findStart():
 # . is ground; there is no pipe in this tile.
 # S is the starting position of the animal; there is a pipe on this tile, but your sketch doesn't show what shape the pipe has.
 
-def getNewLocation(old, current):
-    match tiles[current[0], current[1]]:
+def findNextLocation(old, current):
+    if old == current:
+        print("ERROR", old, current)
+    print(tiles[current[0]][current[1]])
+    match tiles[current[0]][current[1]]:
         case "|":
             if old[0] < current[0]:
-                newLocation = [current[0] + 1, current[1]]
+                nextLocation = [current[0] + 1, current[1]]
             else:
-                newLocation = [current[0] - 1, current[1]]
+                nextLocation = [current[0] - 1, current[1]]
         case "-":
             if old[1] < current[1]:
-                newLocation = [current[0], current[1] + 1]
+                nextLocation = [current[0], current[1] + 1]
             else:
-                newLocation = [current[0], current[1] - 1]
-
+                nextLocation = [current[0], current[1] - 1]
         case "L":
             if old[0] < current[0]:
-                newLocation = [current[0], current[1] + 1]
+                nextLocation = [current[0], current[1] + 1]
             else:
-                newLocation = [current[0] - 1, current[1]]
-
+                nextLocation = [current[0] - 1, current[1]]
+        case "J":
+            if old[0] < current[0]:
+                nextLocation = [current[0], current[1] - 1]
+            else:
+                nextLocation = [current[0] - 1, current[1]]
+        case "7":
+            if old[0] > current[0]:
+                nextLocation = [current[0], current[1] - 1]
+            else:
+                nextLocation = [current[0] + 1, current[1]]
+        case "F":
+            if old[0] > current[0]:
+                nextLocation = [current[0], current[1] + 1]
+            else:
+                nextLocation = [current[0] + 1, current[1]]
+        case ".":
+            print("GROUND!", current)
+        case "S":
+            print("START", current)
+        case _:
+            print("What the fudge!", current)
+    return nextLocation
 
 if __name__ == "__main__":
 
@@ -48,5 +93,24 @@ if __name__ == "__main__":
         temp = [s.strip() for s in temp]
     tiles = tuple(temp)
         
-print(tiles)
-print(findStart())
+    print(tiles)
+    start = findStart()
+    print(start)
+    
+    steps = 0
+    oldPos = [start, start]
+    curPos = findStartOptions(start)
+    newPos = [0,0]
+    steps += 1
+    while curPos[0] != curPos[1]:
+        print(curPos[0])
+        newPos[0] = findNextLocation(oldPos[0], curPos[0])
+        print(newPos[0])
+        print(curPos[1])
+        newPos[1] = findNextLocation(oldPos[1], curPos[1])
+        print(newPos[1])
+        oldPos = tuple(curPos)
+        curPos = tuple(newPos)
+        steps += 1
+
+    print(steps)
