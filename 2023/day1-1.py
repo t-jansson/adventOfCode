@@ -2,7 +2,7 @@
 
 import string
 
-with open('input.txt') as input:
+with open('day1_input.txt') as input:
     lines = input.readlines()
 
 sum = 0

@@ -62,7 +62,7 @@ def getValueFromHand(hand):
 
 if __name__ == "__main__":
 
-    with open('input.txt') as input:
+    with open('day7_input.txt') as input:
         input = input.readlines()
         input = [x.split() for x in input]
 

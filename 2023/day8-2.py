@@ -6,7 +6,7 @@ import math
 
 if __name__ == "__main__":
 
-    with open('input.txt') as input:
+    with open('day8_input.txt') as input:
         directions = input.readline().strip()
         input.readline() #Read empty line
         input = input.readlines()

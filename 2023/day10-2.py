@@ -133,7 +133,7 @@ def markNotLoop(newTiles):
 
 if __name__ == "__main__":
 
-    with open('input.txt') as input:
+    with open('day10_input.txt') as input:
         temp = input.readlines()
         temp = [s.strip() for s in temp]
     tiles = tuple(temp)

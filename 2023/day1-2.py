@@ -2,7 +2,7 @@
 
 numbers = ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-with open('input.txt') as input:
+with open('day1_input.txt') as input:
     lines = input.readlines()
 
 sum = 0

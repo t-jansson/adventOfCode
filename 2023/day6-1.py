@@ -9,7 +9,7 @@ def calc(time, distance):
             wins.append(x)
     return len(wins)
 
-with open('input.txt') as input:
+with open('day6_input.txt') as input:
     times = input.readline()
     times = times.split(":")[1]
     times = times.split()

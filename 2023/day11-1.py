@@ -51,7 +51,7 @@ def calcPairs(numbers):
 
 if __name__ == "__main__":
 
-    with open('input.txt') as input:
+    with open('day11_input.txt') as input:
         image = input.readlines()
         image = [s.strip() for s in image]
         image = [list(s) for s in image]

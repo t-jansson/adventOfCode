@@ -1,6 +1,6 @@
 #Advent of Code 2023 Day 4 - 1
 
-with open('input.txt') as input:
+with open('day4_input.txt') as input:
     lines = input.readlines()
 
 sum = 0

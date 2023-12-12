@@ -1,6 +1,6 @@
 #Advent of Code 2023 Day 3 - 1
 
-with open('input.txt') as input:
+with open('day3_input.txt') as input:
     lines = input.readlines()
 
 lines = [line.strip("\n") for line in lines]

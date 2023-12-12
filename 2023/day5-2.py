@@ -25,7 +25,7 @@ def calc(input, dataList):
     return output
 
 
-with open('input.txt') as input:
+with open('day5_input.txt') as input:
     lines = input.readlines()
 
 seeds = lines[0].split(":")[1].split()
