@@ -41,7 +41,7 @@ def calcTotalDistance(numberPos: list):
     return sum
 
 def calcDistance(pos1: list, pos2: list):
-    return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1]) +1 #något är fel här
+    return abs(pos1[0] - pos2[0]) + abs(pos1[1] - pos2[1])
 
 def calcPairs(numbers):
     sum = 0
@@ -56,14 +56,14 @@ if __name__ == "__main__":
         image = [s.strip() for s in image]
         image = [list(s) for s in image]
 
-    printImage(image)
-    print("")
+    # printImage(image)
+    # print("")
     image = actualSize(image)
-    printImage(image)
-    print("")
+    # printImage(image)
+    # print("")
     image, numberPos = assignNumber(image)
-    printImage(image)
-    print("Pairs:", calcPairs(len(numberPos)))
+    # printImage(image)
+    # print("Pairs:", calcPairs(len(numberPos)))
     result = calcTotalDistance(numberPos)
     print(result)
 
