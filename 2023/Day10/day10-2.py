@@ -4,29 +4,20 @@ tiles = ()
 
 def findStart():
     for i in range(0, len(tiles)):
-        #print(tiles[i])
         for j in range(0, len(tiles[i])):
-            #print(tiles[i][j])
             if tiles[i][j] == "S":
                 return i,j
     return False
 
 def findStartOptions(start):
-    # print(tiles[start[0]][start[1]], start[0],start[1])
-
     startOptions = []
-
     if tiles[start[0]-1][start[1]] in {"|", "F", "7"}:
-        # print(tiles[start[0]-1][start[1]], start[0]-1,start[1])
         startOptions.append([start[0]-1,start[1]])
     if tiles[start[0]][start[1]+1] in {"-", "J", "7"}:
-        # print(tiles[start[0]][start[1]+1], start[0],start[1]+1)
         startOptions.append([start[0],start[1]+1])
     if tiles[start[0]+1][start[1]] in {"|", "L", "J"}:
-        # print(tiles[start[0]+1][start[1]], start[0]+1,start[1])
         startOptions.append([start[0]+1,start[1]])
     if tiles[start[0]][start[1]-1] in {"-", "L", "F"}:
-        # print(tiles[start[0]][start[1]-1], start[0],start[1]-1)
         startOptions.append([start[0],start[1]-1])
     
     if len(startOptions) == 2:
@@ -46,7 +37,6 @@ def findStartOptions(start):
 def findNextLocation(old, current):
     if old == current:
         print("ERROR", old, current)
-    # print(tiles[current[0]][current[1]])
     match tiles[current[0]][current[1]]:
         case "|":
             if old[0] < current[0]:
@@ -90,21 +80,16 @@ def printAllPos(allPos):
     newTiles = list(tiles)
     for pos in allPos:
         newTiles[pos[0]] = str(newTiles[pos[0]][:pos[1]]) + "*" + str(newTiles[pos[0]][pos[1]+1:])
-
     for tile in newTiles:
         print(tile)
-
     return newTiles
 
 def printAllNotPos(allPos):
     newTiles = ["*"*len(tiles[0]) for i in range(len(tiles))]
-    
     for pos in allPos:
         newTiles[pos[0]] = str(newTiles[pos[0]][:pos[1]]) + str(tiles[pos[0]][pos[1]]) + str(newTiles[pos[0]][pos[1]+1:])
-
     for tile in newTiles:
         print(tile)
-
     return newTiles
 
 def checkReplace(tiles, tile, i, j):
@@ -125,6 +110,26 @@ def checkReplace(tiles, tile, i, j):
         if tiles[i+1][j] == "0":
             return True
     return False
+
+def markNotLoop(newTiles):
+    while True:
+        count = 0
+        for i, tile in enumerate(newTiles):
+            for j in range(0, len(tile)):
+                if tile[j] == "*" and checkReplace(newTiles, tile, i, j):
+                    tile = str(tile[:j]) + "0" + str(tile[j+1:])
+                    count += 1
+            newTiles[i] = tile
+        
+        for i, tile in reversed(list(enumerate(newTiles))):
+            for j in range(len(tile)-1, 0, -1):
+                if tile[j] == "*" and checkReplace(newTiles, tile, i, j):
+                    tile = str(tile[:j]) + "0" + str(tile[j+1:])
+                    count += 1
+            newTiles[i] = tile
+        if count == 0:
+            break
+    return newTiles
 
 if __name__ == "__main__":
 
@@ -161,18 +166,7 @@ if __name__ == "__main__":
     # print(steps)
     print("")
 
-    for i, tile in enumerate(newTiles):
-        for j in range(0, len(tile)):
-            if tile[j] == "*" and checkReplace(newTiles, tile, i, j):
-                tile = str(tile[:j]) + "0" + str(tile[j+1:])
-        newTiles[i] = tile
-    
-    for i, tile in reversed(list(enumerate(newTiles))):
-        for j in range(len(tile)-1, 0, -1):
-            if tile[j] == "*" and checkReplace(newTiles, tile, i, j):
-                tile = str(tile[:j]) + "0" + str(tile[j+1:])
-        newTiles[i] = tile
-    
+    newTiles = markNotLoop(newTiles)
 
     for tile in newTiles:
         print(tile)
