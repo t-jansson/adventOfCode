@@ -97,7 +97,7 @@ def printAllPos(allPos):
     return newTiles
 
 def printAllNotPos(allPos):
-    newTiles = ["0"*len(tiles[0]) for i in range(len(tiles))]
+    newTiles = ["*"*len(tiles[0]) for i in range(len(tiles))]
     
     for pos in allPos:
         newTiles[pos[0]] = str(newTiles[pos[0]][:pos[1]]) + str(tiles[pos[0]][pos[1]]) + str(newTiles[pos[0]][pos[1]+1:])
@@ -106,6 +106,25 @@ def printAllNotPos(allPos):
         print(tile)
 
     return newTiles
+
+def checkReplace(tiles, tile, i, j):
+    if i == 0 or i == len(tiles)-1:
+        return True
+    if j == 0 or j == len(tile)-1:
+        return True
+    if j > 0:
+        if tile[j-1] == "0":
+            return True
+    if j < len(tile)-1:
+        if tile[j+1] == "0":
+            return True
+    if i > 0:
+        if tiles[i-1][j] == "0":
+            return True
+    if i < len(tiles)-1:
+        if tiles[i+1][j] == "0":
+            return True
+    return False
 
 if __name__ == "__main__":
 
@@ -138,5 +157,28 @@ if __name__ == "__main__":
 
     allPos.append(curPos[0])
     # printAllPos(allPos)
-    printAllNotPos(allPos)
+    newTiles = printAllNotPos(allPos)
     # print(steps)
+    print("")
+
+    for i, tile in enumerate(newTiles):
+        for j in range(0, len(tile)):
+            if tile[j] == "*" and checkReplace(newTiles, tile, i, j):
+                tile = str(tile[:j]) + "0" + str(tile[j+1:])
+        newTiles[i] = tile
+    
+    for i, tile in reversed(list(enumerate(newTiles))):
+        for j in range(len(tile)-1, 0, -1):
+            if tile[j] == "*" and checkReplace(newTiles, tile, i, j):
+                tile = str(tile[:j]) + "0" + str(tile[j+1:])
+        newTiles[i] = tile
+    
+
+    for tile in newTiles:
+        print(tile)
+
+    result = 0
+    for tile in newTiles:
+        counter = tile.count("*")
+        result += counter
+    print(result)
