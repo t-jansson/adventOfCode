@@ -14,7 +14,7 @@ def findReflection(dataSet):
                 elif dataSet[j] == dataSet[j-k]:
                     # print("Reflection", j, j-k)
                     if j == len(dataSet)-1 or j-k == 0:
-                        print("Real reflection at", i, i+1)
+                        # print("Real reflection at", i, i+1)
                         return i + 1
                     else:
                         k += 2
@@ -38,7 +38,8 @@ if __name__ == "__main__":
         if row == []:
             dataSets.append(data)
             data = []
-        elif i == len(input) -1 :
+        elif i == len(input) -1:
+            data.append(row)
             dataSets.append(data)
         else:
             data.append(row)
@@ -49,9 +50,7 @@ if __name__ == "__main__":
         setResult += findReflection(dataSet) * 100
         dataSet = transpose(dataSet).tolist()
         setResult += findReflection(dataSet)
-        print(setResult, i)
-        if setResult == 0:
-            print("Fault? at ", i)
+        # print(setResult, i)
         result += setResult
 
     print(result)
