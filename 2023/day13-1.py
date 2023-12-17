@@ -4,7 +4,6 @@ from numpy import transpose
     
 def findReflection(dataSet):
     for i in range(len(dataSet)-1):
-        # print(dataSet[i])
         if dataSet[i] == dataSet[i+1]:
             # print("Reflection at row", i)
             k = 1
@@ -22,7 +21,6 @@ def findReflection(dataSet):
                 else:
                     break
     return 0
-    
 
 if __name__ == "__main__":
 
@@ -50,7 +48,6 @@ if __name__ == "__main__":
         setResult += findReflection(dataSet) * 100
         dataSet = transpose(dataSet).tolist()
         setResult += findReflection(dataSet)
-        # print(setResult, i)
         result += setResult
 
     print(result)

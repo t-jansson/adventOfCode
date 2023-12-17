@@ -1,4 +1,4 @@
-#Advent of Code 2023 Day 13 - 1
+#Advent of Code 2023 Day 13 - 2
 
 from numpy import transpose
     
@@ -16,13 +16,13 @@ def findReflection(dataSet):
         nbrOfSmudges = 0
         # print(dataSet[i])
         if compareRows(dataSet[i], dataSet[i+1]) <= 1:
-            # print("Reflection at row", i)
             k = 1
             for j in range(i+1, len(dataSet)):
                 if j-k < 0:
-                    print("out of range in dataset", j-k)
+                    print("out of range in dataset", j-k) #Should not happen...
+                    break
                 nbrOfSmudges += compareRows(dataSet[j], dataSet[j-k])
-                if nbrOfSmudges <= 1: #dataSet[j] == dataSet[j-k]:
+                if nbrOfSmudges <= 1:
                     # print("Reflection", j, j-k)
                     if j == len(dataSet)-1 or j-k == 0:
                         # print("Real reflection at", i, i+1)
@@ -32,12 +32,10 @@ def findReflection(dataSet):
                             break
                     else:
                         k += 2
-                        continue
                 else:
                     break
     return 0
     
-
 if __name__ == "__main__":
 
     with open('day13_input.txt') as input:
@@ -60,12 +58,8 @@ if __name__ == "__main__":
 
     result = 0
     for i, dataSet in enumerate(dataSets):
-        setResult = 0
-        setResult += findReflection(dataSet) * 100
+        result += findReflection(dataSet) * 100
         dataSet = transpose(dataSet).tolist()
-        setResult += findReflection(dataSet)
-        if setResult == 0:
-            print(setResult, i)
-        result += setResult
+        result += findReflection(dataSet)
 
     print(result)
