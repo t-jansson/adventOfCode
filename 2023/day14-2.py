@@ -9,8 +9,11 @@ def countRocks(platform):
     return sum
 
 def tiltPlatform(platform):
-    for row in platform:
+    platform90 = transpose(platform).tolist()
+    for row in platform90:
         tiltRow(row)
+    platform = transpose(platform90).tolist()
+    return platform
 
 def tiltRow(row):
     for i, char in enumerate(row):
@@ -23,17 +26,34 @@ def tiltRow(row):
                     row[j] = "."
                     break
 
+def rotateRight(platform):
+    rotated = tuple(zip(*platform[::-1]))
+    return rotated
+
 if __name__ == "__main__":
 
     with open('day14_input.txt') as input:
         platform = [i.strip() for i in input.readlines()]
         platform = [list(i) for i in platform]
 
-    platform = transpose(platform).tolist()
+    memory = []
+    for i in range(1000000000-1):
+        platform = tiltPlatform(platform)
 
-    tiltPlatform(platform)
+        platform = tiltPlatform(rotateRight(platform))
 
-    platform = transpose(platform).tolist()
+        platform = tiltPlatform(rotateRight(platform))
+
+        platform = tiltPlatform(rotateRight(platform))
+
+        platform = rotateRight(platform)
+        if platform in memory:
+            print(i)
+            print((1000000000 - i) % i)
+            platform = memory[(1000000000 - i) % i]
+            break
+        else:
+            memory.append(platform)
 
     result = countRocks(platform)
     print(result)
