@@ -2,36 +2,40 @@
 
 from numpy import transpose
     
+def countRocks(platform):
+    sum = 0
+    for i, row in enumerate(platform):
+        sum += row.count("O") * (len(platform) - i)
+    return sum
+
+
+def tiltRow(row):
+    for i, char in enumerate(row):
+        if char == ".":
+            for j in range(i+1, len(row)):
+                if row[j] == "#":
+                    break
+                elif row[j] == "O":
+                    row[i] = "O"
+                    row[j] = "."
+                    break
+
 if __name__ == "__main__":
 
     with open('day14_input.txt') as input:
         platform = [i.strip() for i in input.readlines()]
         platform = [list(i) for i in platform]
 
-    for row in platform:
-        print(row)
-
-    print("")
-    platform90 = transpose(platform).tolist
+    platform90 = transpose(platform).tolist()
 
     for row in platform90:
-        print(row)
+        line = ["".join(s) for s in row]
+        tiltRow(row)
 
-    # dataSets = []
-    # data = []
-    # for i, row in enumerate(input):
-    #     row = row.replace("#", "1")
-    #     row = row.replace(".", "0")
-    #     row = row.replace("O", "2")
-    #     row = [int(x) for x in row]
-    #     if row == []:
-    #         dataSets.append(data)
-    #         data = []
-    #     elif i == len(input) -1:
-    #         data.append(row)
-    #         dataSets.append(data)
-    #     else:
-    #         data.append(row)
+    platform = transpose(platform90).tolist()
 
-    # for set in dataSets:
-    #     print(set)
+    for row in platform:
+        line = ["".join(s) for s in row]
+
+    result = countRocks(platform)
+    print(result)
