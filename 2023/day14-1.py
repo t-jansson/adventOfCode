@@ -8,6 +8,9 @@ def countRocks(platform):
         sum += row.count("O") * (len(platform) - i)
     return sum
 
+def tiltPlatform(platform):
+    for row in platform:
+        tiltRow(row)
 
 def tiltRow(row):
     for i, char in enumerate(row):
@@ -26,16 +29,11 @@ if __name__ == "__main__":
         platform = [i.strip() for i in input.readlines()]
         platform = [list(i) for i in platform]
 
-    platform90 = transpose(platform).tolist()
+    platform = transpose(platform).tolist()
 
-    for row in platform90:
-        line = ["".join(s) for s in row]
-        tiltRow(row)
+    tiltPlatform(platform)
 
-    platform = transpose(platform90).tolist()
-
-    for row in platform:
-        line = ["".join(s) for s in row]
+    platform = transpose(platform).tolist()
 
     result = countRocks(platform)
     print(result)
