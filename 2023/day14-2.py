@@ -36,7 +36,8 @@ if __name__ == "__main__":
         platform = [i.strip() for i in input.readlines()]
         platform = [list(i) for i in platform]
 
-    memory = []
+    memoryi = {}
+    memoryOffset = {}
     for i in range(1000000000-1):
         platform = tiltPlatform(platform)
 
@@ -47,13 +48,13 @@ if __name__ == "__main__":
         platform = tiltPlatform(rotateRight(platform))
 
         platform = rotateRight(platform)
-        if platform in memory:
+        if platform in memoryi:
             print(i)
-            print((1000000000 - i) % i)
-            platform = memory[(1000000000 - i) % i]
-            break
+            if platform not in memoryOffset:
+                memoryOffset[platform] = i - memoryi[platform]
         else:
-            memory.append(platform)
+            memoryi[platform] = i
+
 
     result = countRocks(platform)
     print(result)
