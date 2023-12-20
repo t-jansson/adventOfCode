@@ -13,10 +13,6 @@ if __name__ == "__main__":
     for i in range(i+1, len(input)):
         ratings.append(input[i])
 
-    print(workflows)
-    print("")
-    print(ratings)
-
     flows = {}
     for workflow in workflows:
         workflow = workflow.split("{")
@@ -32,20 +28,41 @@ if __name__ == "__main__":
         rating = dict(rating)
         workflow = [flows["in"]]
         for work in workflow:
-            if work[0][1] == "<":
-                if int(rating[work[0][0]]) < int(work[0][2:work[0].index(":")]):
-                    if work[work[0].index(":"):] == "A":
-                        approved.append(rating)
-                    elif work[work[0].index(":"):] == "R":
-                        rejected.append(rating)
-                    workflow.append([flows[work[work[0].index(":"):]]])
-            elif work[0][1] == ">":
-                if int(rating[work[0][0]]) > int(work[0][2:work[0].index(":")]):
-                    if work[work[0].index(":"):] == "A":
-                        approved.append(rating)
-                    elif work[work[0].index(":"):] == "R":
-                        rejected.append(rating)
-                    workflow.append([flows[work[0].index(":"):]])
-            else:
-                
-            pass
+            for w in work:
+                if w == "A":
+                    approved.append(rating)
+                elif w == "R":
+                    rejected.append(rating)
+                elif w[1] == "<":
+                    if int(rating[w[0]]) < int(w[2:w.index(":")]):
+                        if w[w.index(":")+1:] == "A":
+                            approved.append(rating)
+                        elif w[w.index(":")+1:] == "R":
+                            rejected.append(rating)
+                        else:
+                            workflow.append(flows[w[w.index(":")+1:]])
+                        break
+                elif w[1] == ">":
+                    if int(rating[w[0]]) > int(w[2:w.index(":")]):
+                        if w[w.index(":")+1:] == "A":
+                            approved.append(rating)
+                        elif w[w.index(":")+1:] == "R":
+                            rejected.append(rating)
+                        else:
+                            workflow.append(flows[w[w.index(":")+1:]])
+                        break
+                else:
+                    workflow.append(flows[w])
+
+    x = 0
+    m = 0
+    a = 0
+    s = 0
+    for items in approved:
+        x += int(items["x"])
+        m += int(items["m"])
+        a += int(items["a"])
+        s += int(items["s"])
+    
+    result = x+m+a+s
+    print(result)
